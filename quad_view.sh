@@ -9,7 +9,16 @@ i2="rtsp://togo:8301/a720.mp4"
 i3="rtsp://togo:8301/a720.mp4"
 i4="rtsp://togo:8301/a720.mp4"
 
+i1="rtsp://10.10.10.181/1"
+i2="rtsp://10.10.10.181/1"
+i3="rtsp://10.10.10.181/1"
+i4="rtsp://10.10.10.181/1"
+
 source_1="videotestsrc"
+source_2="videotestsrc"
+source_3="videotestsrc"
+source_4="videotestsrc"
+
 tcptimeout=1000000
 timeouttoretrywithtcp=0
 rtspsrc="rtspsrc timeout=$timeouttoretrywithtcp tcp-timeout=$tcptimeout "
@@ -17,9 +26,7 @@ source_1="$rtspsrc location="$i1" latency="$latency" ! rtph264depay ! avdec_h264
 source_2="$rtspsrc location="$i2" latency="$latency" ! rtph264depay ! avdec_h264"
 source_3="$rtspsrc location="$i3" latency="$latency" ! rtph264depay ! avdec_h264"
 source_4="$rtspsrc location="$i4" latency="$latency" ! rtph264depay ! avdec_h264"
-source_2="videotestsrc"
-source_3="videotestsrc"
-source_4="videotestsrc"
+
 
 #source_1="v4l2src"
 #source_2="videotestsrc pattern="snow""
@@ -32,10 +39,14 @@ echo $source_2
 echo $source_3
 echo $source_4
 
-source_x=1280
-source_y=720
-#source_x=640
-#source_y=360
+get_rtsp_res(){
+  url="$1"
+  ffprobe "$1" 2>&1 |grep Stream |grep Video |grep -oP "\d+x\d+"
+}
+res_axb=$(get_rtsp_res $i1)
+source_x=$(echo $res_axb | cut -d "x" -f 1 )
+source_y=$(echo $res_axb | cut -d "x" -f 2 )
+
 xpos=$(($source_x))
 ypos=$(($source_y))
 echo x:$xpos
