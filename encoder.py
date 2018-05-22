@@ -103,6 +103,7 @@ class multiple_encoders():
 
     def __getitem__(self,key):
         return self.my_encoders[ key ];
+
     def __len__(self):
         return len(self.my_encoders)
 
@@ -129,11 +130,20 @@ def main():
     #use nmap to find them based on fingerprint
     auth=("admin","admin")
     ips = [
-            "10.10.10.181"
+            "10.10.10.181",
+            "10.10.10.235"
             ]
     es = multiple_encoders(ips,auth)
-    e1 = es[0]
-    test_set_resolution_of_substream_1(e1, 1024,576)
+    
+    #e1 = es[0]
+    #test_set_resolution_of_substream_1(e1, 1024,576)
+
+    #set first substream resolution on all cameras
+    #pprint( es.do("set_output",(1,{"venc_width":1024,"venc_height":576})) )
+    pprint( es.do("get_sys") )
+    #pprint( es.do("get_output",(0,)) )
+    #pprint( es.do("get_output",(1,)) )
+
     import pdb; pdb.set_trace()
 
 
