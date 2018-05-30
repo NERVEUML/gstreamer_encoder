@@ -5,6 +5,7 @@ ffprobe -version 2>&1 >/dev/null
 if [[ "$?" -eq "0" ]]; then
   ffprobe=ffprobe
 else
+  echo "falling back to avprobe since ffprobe isn't present"
   ffprobe=avprobe
 fi
 
@@ -46,7 +47,7 @@ echo $source_4
 
 get_rtsp_res(){
   url="$1"
-  ffprobe "$1" 2>&1 |grep Stream |grep Video |grep -oP "\d+x\d+"
+  $ffprobe "$1" 2>&1 |grep Stream |grep Video |grep -oP "\d+x\d+"
 }
 res_axb=$(get_rtsp_res $i1)
 source_x=$(echo $res_axb | cut -d "x" -f 1 )
