@@ -1,7 +1,12 @@
 #!/bin/bash
 
 #gst-launch-1.0 rtspsrc location="$location" latency=$latency ! rtph264depay ! avdec_h264 ! autovideosink
-
+ffprobe -version 2>&1 >/dev/null
+if [[ "$?" -eq "0" ]]; then
+  ffprobe=ffprobe
+else
+  ffprobe=avprobe
+fi
 
 latency=100
 i1="rtsp://togo:8301/a720.mp4"
