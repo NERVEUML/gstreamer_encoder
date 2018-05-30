@@ -9,10 +9,10 @@ i2="rtsp://togo:8301/a720.mp4"
 i3="rtsp://togo:8301/a720.mp4"
 i4="rtsp://togo:8301/a720.mp4"
 
-i1="rtsp://10.10.10.235/1"
-i2="rtsp://10.10.10.235/1"
-i3="rtsp://10.10.10.181/1"
-i4="rtsp://10.10.10.181/1"
+i1="rtsp://encoder/1"
+i2="rtsp://encoder/1"
+i3="rtsp://encoder/1"
+i4="rtsp://encoder/1"
 
 source_1="videotestsrc"
 source_2="videotestsrc"
@@ -52,7 +52,7 @@ ypos=$(($source_y))
 echo x:$xpos
 echo y:$ypos
 
-gst-launch-1.0 glvideomixer name=mix \
+gst-launch-1.0 videomixer name=mix \
   sink_0::xpos=0 sink_0::ypos=0 \
   sink_1::xpos=$xpos sink_1::ypos=0 \
   sink_2::xpos=0 sink_2::ypos=$ypos \
