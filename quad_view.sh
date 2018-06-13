@@ -9,16 +9,21 @@ else
   ffprobe=avprobe
 fi
 
-latency=100
-i1="rtsp://togo:8301/a720.mp4"
-i2="rtsp://togo:8301/a720.mp4"
-i3="rtsp://togo:8301/a720.mp4"
-i4="rtsp://togo:8301/a720.mp4"
 
-i1="rtsp://encoder/1"
-i2="rtsp://encoder/1"
-i3="rtsp://encoder/1"
-i4="rtsp://encoder/1"
+
+latency=100
+i1="rtsp://10.0.0.14/0"
+i2="rtsp:///10.0.0.16/0"
+i3="rtsp://10.0.0.12/0"
+i4="rtsp://10.0.0.19/0"
+#10.0.0.7/0
+#10.0.0.15/0
+# GOPROS -> .11-.18
+
+#i1="rtsp://encoder/1"
+#i2="rtsp://encoder/1"
+#i3="rtsp://encoder/1"
+#i4="rtsp://encoder/1"
 
 source_1="videotestsrc"
 source_2="videotestsrc"
