@@ -4,9 +4,9 @@ if [[ "x$latency" == "x" ]]; then
 fi
 file=$1
 if [[ "x$file" == "x" ]]; then
-	file=a.mp4
+	file=a.mov
 fi
-host=togo:8301
+host=192.168.1.106:8301
 location=rtsp://$host/$file
 
 gst-launch-1.0 rtspsrc location="$location" latency=$latency ! rtph264depay ! avdec_h264 ! autovideosink
